@@ -94,6 +94,7 @@ return {
     {
         'daschw/leaf.nvim',
         config = function()
+            local colors = require("leaf.colors").setup()
             require("leaf").setup({
                 underlineStyle = "underline",
                 commentStyle = "italic",
@@ -104,7 +105,16 @@ return {
                 variablebuiltinStyle = "italic",
                 transparent = true,
                 colors = {},
-                overrides = {},
+                overrides = {
+                    TelescopeBorder = {bg = "transparent"},
+                    BlinkCmpDoc = {bg = "transparent"},
+                    BlinkCmpMenu = {bg = "transparent"},
+                    BlinkCmpMenuSelection = {link = "visual"},
+                    BlinkCmpMenuBorder = {bg = "transparent"},
+                    IblScope = {fg = colors.leaf_green_3},
+                    NormalFloat = {bg = 'transparent'},
+                    FloatBorder = {bg = 'transparent'},
+                },
                 theme = "auto", -- default, based on vim.o.background, alternatives: "light", "dark"
                 contrast = "low", -- default, alternatives: "medium", "high"
             })
@@ -224,6 +234,7 @@ return {
                 },
 
                 highlight_groups = {
+                    BlinkCmpDoc = { bg = 'transparent' }
                     -- Comment = { fg = "foam" },
                     -- VertSplit = { fg = "muted", bg = "muted" },
                 },

@@ -8,7 +8,7 @@ return {
         "MunifTanjim/nui.nvim",
         "rcarriga/nvim-notify",
     },
-    config = function ()
+    config = function()
         require("noice").setup({
             lsp = {
                 -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -17,23 +17,44 @@ return {
                     ["vim.lsp.util.stylize_markdown"] = true,
                     ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
                 },
+                hover = {
+                    enabled = true,
+                    silent = true,
+                    opts = {
+                        win_options = {
+                            winblend = 11,
+                            winhighlight = {
+                                Normal = "NormalFloat",
+                                FloatBorder = "FloatBorder",
+                            },
+                        },
+                        border = {
+                            style = "rounded",
+                        },
+                        size = {
+                            max_width = 100,
+                            max_height = 20,
+                        },
+                    },
+                }
             },
             -- you can enable a preset for easier configuration
             presets = {
-                bottom_search = true, -- use a classic bottom cmdline for search
-                command_palette = true, -- position the cmdline and popupmenu together
+                bottom_search = true,         -- use a classic bottom cmdline for search
+                command_palette = true,       -- position the cmdline and popupmenu together
                 long_message_to_split = true, -- long messages will be sent to a split
-                inc_rename = true, -- enables an input dialog for inc-rename.nvim
-                lsp_doc_border = true, -- add a border to hover docs and signature help
+                inc_rename = true,            -- enables an input dialog for inc-rename.nvim
+                lsp_doc_border = true,        -- add a border to hover docs and signature help
             },
         })
 
         require("notify").setup({
             merge_duplicates = true,
-            top_down = false
+            top_down = true,
+            background_colour = "#000000"
         }
         )
-        local dismiss_messages = function ()
+        local dismiss_messages = function()
             vim.cmd("Noice dismiss")
         end
         vim.api.nvim_create_user_command('Dismiss', dismiss_messages, {})
