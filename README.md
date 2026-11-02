@@ -7,3 +7,4 @@ Used for TS and python development
 - npm
 - pip
 - fzf
+- tree-sitter-cli
