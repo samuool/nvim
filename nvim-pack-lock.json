@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "mason-nvim-dap.nvim": {
+      "rev": "9a10e096703966335bd5c46c8c875d5b0690dade",
+      "src": "https://github.com/jay-babu/mason-nvim-dap.nvim"
+    },
+    "mason.nvim": {
+      "rev": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d",
+      "src": "https://github.com/mason-org/mason.nvim"
+    },
+    "turbo-debug.nvim": {
+      "rev": "20dec9bc7b824003877324f4475ed0af2f5ce049",
+      "src": "https://github.com/swaits/turbo-debug.nvim"
+    }
+  }
+}
