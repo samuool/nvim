@@ -15,3 +15,5 @@ vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to Definition' })
 vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = 'Go to Implementation' })
 -- Code Actions
 vim.keymap.set('n', '<leader>c', vim.lsp.buf.code_action, { desc = 'Get Code Actions' })
+--Show Diagnostics
+vim.keymap.set('n', 'ge', vim.diagnostic.open_float, { desc = 'Show diagnostics under cursor'})

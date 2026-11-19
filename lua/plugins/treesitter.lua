@@ -11,6 +11,7 @@ return {
 
     ts.install({
       "lua",
+      "java",
       "vim",
       "vimdoc",
       "query",

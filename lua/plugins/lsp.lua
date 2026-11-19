@@ -8,9 +8,40 @@ return {
         local mason = require("mason")
         mason.setup({})
 
+        vim.lsp.config("jdtls", {
+            cmd = function(dispatchers, config)
+                -- Mason's jdtls 1.63.0 requires Java 25 to run the server.
+                -- Keep the server JVM separate from the project's JAVA_HOME.
+                local java_home = vim.env.JDTLS_JAVA_HOME
+
+                if java_home==nil then
+                  vim.notify("JDTLS_JAVA_HOME variable not configured", vim.log.levels.ERROR)
+                end
+
+                local root = config.root_dir or vim.fn.getcwd()
+                local cache = vim.fn.stdpath("cache") .. "/jdtls/" .. vim.fn.sha256(root)
+                local cmd = {
+                    "jdtls",
+                    "--java-executable", java_home .. "/bin/java",
+                    "-configuration", cache .. "/config",
+                    "-data", cache .. "/workspace",
+                }
+
+                for arg in (vim.env.JDTLS_JVM_ARGS or ""):gmatch("%S+") do
+                    table.insert(cmd, "--jvm-arg=" .. arg)
+                end
+
+                return vim.lsp.rpc.start(cmd, dispatchers, {
+                    cwd = config.cmd_cwd,
+                    env = config.cmd_env,
+                    detached = config.detached,
+                })
+            end,
+        })
+
         local mason_lsp = require('mason-lspconfig')
         mason_lsp.setup({
-            ensure_installed = { "lua_ls", "ts_ls", "eslint" },
+            ensure_installed = { "lua_ls", "ts_ls", "eslint", "jdtls" },
         })
 
 
